@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abimbola Oyeyemi Portfolio</title>
+    <!-- <title>Portfolio |Educator|Graphics Designer|Web designer|Video Editor</title> -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        * {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+        }
+        
+        .skill-bar {
+            transition: width 1.5s ease-in-out;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        /* Project card image styles */
+        
+        .project-media-wrapper {
+            position: relative;
+            height: 12rem;
+            overflow: hidden;
+            border-bottom-left-radius: 0.75rem;
+            border-bottom-right-radius: 0.75rem;
+        }
+        
+        .project-media-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.45s ease;
+            display: block;
+        }
+        
+        .card-hover:hover .project-media-wrapper img {
+            transform: scale(1.06);
+        }
+        
+        .project-overlay {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 0.75rem 1rem;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.45) 100%);
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 0.5rem;
+        }
+        
+        .project-badge {
+            background: rgba(255, 255, 255, 0.12);
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+        }
+        /* Dark mode overrides (toggled via `body.dark`) */
+        
+         :root {
+            --transition-fast: 0.22s;
+        }
+        
+        body {
+            transition: background-color var(--transition-fast) ease, color var(--transition-fast) ease;
+        }
+        
+        body.dark {
+            background: #0b1220 !important;
+            color: #e6eef8 !important;
+        }
+        
+        body.dark .hero-gradient {
+            background: linear-gradient(135deg, #0f1724 0%, #1f2a44 60%, #3b3256 100%);
+        }
+        
+        body.dark .bg-white {
+            background: #0b1220 !important;
+            color: #e6eef8 !important;
+        }
+        
+        body.dark .bg-gray-50 {
+            background: #071026 !important;
+        }
+        
+        body.dark .text-gray-500,
+        body.dark .text-gray-600,
+        body.dark .text-gray-400 {
+            color: #94a3b8 !important;
+        }
+        
+        body.dark .text-gray-800 {
+            color: #e6eef8 !important;
+        }
+        
+        body.dark .border-gray-300 {
+            border-color: rgba(255, 255, 255, 0.06) !important;
+        }
+        
+        body.dark .shadow-sm {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45) !important;
+        }
+        
+        body.dark .nav-link {
+            color: #cbd5e1 !important;
+        }
+        /* Theme toggle button */
+        
+        .theme-toggle {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: inherit;
+        }
+        
+        .theme-toggle i {
+            font-size: 1.125rem;
+        }
+        /* Floating WhatsApp button */
+        
+        .whatsapp-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+            z-index: 60;
+            cursor: pointer;
+            transform-origin: center;
+            animation: floaty 3.6s ease-in-out infinite;
+            text-decoration: none;
+        }
+        
+        @keyframes floaty {
+            0% {
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                transform: translateY(-8px) scale(1.03);
+            }
+            100% {
+                transform: translateY(0) scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md shadow-sm transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-2xl font-bold gradient-text">Portfolio</a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-gray-600 hover:text-gray-900 font-medium">Home</a>
+                    <a href="#about" class="nav-link text-gray-600 hover:text-gray-900 font-medium">About</a>
+                    <a href="#skills" class="nav-link text-gray-600 hover:text-gray-900 font-medium">Skills</a>
+                    <a href="#projects" class="nav-link text-gray-600 hover:text-gray-900 font-medium">Projects</a>
+                    <a href="#contact" class="nav-link text-gray-600 hover:text-gray-900 font-medium">Contact</a>
+                </div>
+                <!-- Mobile Menu Button -->
+                <button id="menuBtn" class="md:hidden text-gray-600 text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <!-- Theme toggle -->
+                <button id="themeToggle" class="theme-toggle ml-4 hidden md:inline-flex items-center justify-center" aria-label="Toggle dark mode" title="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="hidden md:hidden mt-4 pb-4 space-y-4">
+                <a href="" id="themeToggle"></a>
+                <button class="theme-toggle ml-4 hidden md:inline-flex items-center justify-center" aria-label="Toggle dark mode" title="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <a href="#home" class="block text-gray-600 hover:text-gray-900 theme-toggle ml-4  md:inline-flex">theme</a>
+                <a href="#home" class="block text-gray-600 hover:text-gray-900 font-medium">Home</a>
+                <a href="#about" class="block text-gray-600 hover:text-gray-900 font-medium">About</a>
+                <a href="#skills" class="block text-gray-600 hover:text-gray-900 font-medium">Skills</a>
+                <a href="#projects" class="block text-gray-600 hover:text-gray-900 font-medium">Projects</a>
+                <a href="#contact" class="block text-gray-600 hover:text-gray-900 font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center hero-gradient text-white pt-16">
+        <div class="max-w-6xl mx-auto px-6 py-20 text-center">
+            <div class="fade-in">
+                <p class="text-lg md:text-xl mb-4 opacity-90">Hello, I'm</p>
+                <h1 class="text-5xl md:text-7xl font-bold mb-6">Abimbola Oyeyemi</h1>
+                <p class="text-xl md:text-2xl mb-8 opacity-90"> Educator,Web desinger, graphics designer,video editor.</p>
+                <p class="text-lg max-w-2xl mx-auto mb-10 opacity-80">
+                    I help schools grow, brands shine with creative graphics, web design and video editing skills. </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#projects" class="px-8 py-4 bg-white text-purple-600 font-semibold rounded-full hover:bg-gray-100 transition-all duration-300 shadow-lg">
+                        View My Work
+                    </a>
+                    <a href="#contact" class="px-8 py-4 border-2 border-white text-white font-semibold rounded-full hover:bg-white hover:text-purple-600 transition-all duration-300">
+                        Get In Touch
+                    </a>
+                </div>
+            </div>
+            <div class="mt-16 animate-bounce">
+                <a href="#about" class="text-white/70 hover:text-white">
+                    <i class="fas fa-chevron-down text-2xl"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="fade-in">
+                <h2 class="text-4xl font-bold text-center mb-4">About <span class="gradient-text">Me</span></h2>
+                <p class="text-gray-500 text-center mb-12 max-w-2xl mx-auto">Get to know me better</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="fade-in">
+                    <div class="relative">
+                        <div class="w-full h-96 border-4 border-purple-300 rounded-2xl overflow-hidden">
+                            <img src="Abimbola Oyeyemi.jpg" alt="Abimbola Oyeyemi" class="w-full h-full object-cover rounded-2xl">
+                        </div>
+                    </div>
+                </div>
+                <div class="fade-in">
+                    <h3 class="text-2xl font-bold mb-4">A passionate educator and designer based in Nigeria</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        With few years of experience in web development and graphics design, I specialize in creating responsive, user-friendly applications that solve real-world problems. My passion lies in transforming complex ideas into elegant, functional digital solutions.
+                    </p>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects, or enjoying a good cup of coffee while reading about the latest industry trends.
+                    </p>
+                    <div class="grid grid-cols-2 gap-6 mb-8">
+                        <div>
+                            <p class="text-3xl font-bold gradient-text">50+</p>
+                            <p class="text-gray-500">Projects Completed</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold gradient-text">30+</p>
+                            <p class="text-gray-500">Happy Clients</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold gradient-text">5+</p>
+                            <p class="text-gray-500">Years Experience</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold gradient-text">10+</p>
+                            <p class="text-gray-500">Awards Won</p>
+                        </div>
+                    </div>
+                    <a id="downloadCv" href="Abimbola%20portfolio%20.pdf" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold rounded-full hover:opacity-90 transition-opacity" aria-label="View CV">
+                        <i class="fas fa-eye"></i> View Portfolio
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="fade-in">
+                <h2 class="text-4xl font-bold text-center mb-4">My <span class="gradient-text">Skills</span></h2>
+                <p class="text-gray-500 text-center mb-12 max-w-2xl mx-auto">Technologies I work with</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="fade-in space-y-6">
+                    <h3 class="text-xl font-semibold mb-6">Technical Skills</h3>
+
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">HTML/CSS</span>
+                            <span class="text-purple-600">95%</span>
+                        </div>
+                        <div class="h-3 bg-gray-200 rounded-full overflow-hidden">
+                            <div class="skill-bar h-full bg-gradient-to-r from-purple-600 to-pink-500 rounded-full" data-width="95%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">JavaScript</span>
+                            <span class="text-purple-600">90%</span>
+                        </div>
+                        <div class="h-3 bg-gray-200 rounded-full overflow-hidden">
+                            <div class="skill-bar h-full bg-gradient-to-r from-purple-600 to-pink-500 rounded-full" data-width="90%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Canva</span>
+                            <span class="text-purple-600">85%</span>
+                        </div>
+                        <div class="h-3 bg-gray-200 rounded-full overflow-hidden">
+                            <div class="skill-bar h-full bg-gradient-to-r from-purple-600 to-pink-500 rounded-full" data-width="85%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">CorelDraw</span>
+                            <span class="text-purple-600">80%</span>
+                        </div>
+                        <div class="h-3 bg-gray-200 rounded-full overflow-hidden">
+                            <div class="skill-bar h-full bg-gradient-to-r from-purple-600 to-pink-500 rounded-full" data-width="80%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Photoshop</span>
+                            <span class="text-purple-600">75%</span>
+                        </div>
+                        <div class="h-3 bg-gray-200 rounded-full overflow-hidden">
+                            <div class="skill-bar h-full bg-gradient-to-r from-purple-600 to-pink-500 rounded-full" data-width="75%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fade-in">
+                    <h3 class="text-xl font-semibold mb-6">Tools & Technologies</h3>
+                    <div class="grid grid-cols-3 gap-4">
+                        <div class="card-hover bg-white p-6 rounded-xl shadow-sm text-center">
+                            <i class="fab fa-html5 text-4xl text-orange-500 mb-3"></i>
+                            <p class="text-sm font-medium">HTML</p>
+                        </div>
+                        <div class="card-hover bg-white p-6 rounded-xl shadow-sm text-center">
+                            <i class="fab fa-css3 text-4xl text-blue-600 mb-3"></i>
+                            <p class="text-sm font-medium">CSS</p>
+                        </div>
+                        <div class="card-hover bg-white p-6 rounded-xl shadow-sm text-center">
+                            <i class="fab fa-js text-4xl text-yellow-500 mb-3"></i>
+                            <p class="text-sm font-medium">JavaScript</p>
+                        </div>
+                        <div class="card-hover bg-white p-6 rounded-xl shadow-sm text-center">
+                            <i class="fab fa-git-alt text-4xl text-orange-600 mb-3"></i>
+                            <p class="text-sm font-medium">Git</p>
+                        </div>
+                        <div class="card-hover bg-white p-6 rounded-xl shadow-sm text-center">
+                            <i class=><img src="data:image/png;base64,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" alt="canva" style="justify-self: center; align-items: center;"></i>
+                            <p class="text-sm font-medium">Canva</p>
+                        </div>
+                        <div class="card-hover bg-white p-6 rounded-xl shadow-sm text-center">
+                            <i><img src="data:image/png;base64,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" alt="coreldraw" style="justify-self: center; align-items: center;"></i>
+                            <p class="text-sm font-medium">CorelDraw</p>
+                        </div>
+                        <div class="card-hover bg-white p-6 rounded-xl shadow-sm text-center">
+                            <i><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAADPElEQVR4nO2ZXUgUURTH96mYSqF6iChK2/Sh8itCsnqoB3X70J1Vt1KKDBWSVAwisA9LNIUkLBKshAxTkLLMpDCNwFAzDV1T/Ewrl9lE0/3MsHD/cYedgRU1HNnd2Zg/nIc5dy73/M499w6ckckkSZIkSdRSDGC5ikEazaCFZmChdYBDjYGFrKVkkErWXlLwh0ewQamDxuFB6+a1DhKD4MxzwSs0Y/BKyIaHHw1KHu5Q8/CjsTk+C6EtWh5C0E6wZWML3jMoxuGBU7NBAqPZtW1llbJoACWDD2Qyybyzg6ds5p2YwwIoGbwXAmAmk51RNtR8u+Cv4gDMiwbgDpKrgqdsxsUhAVD/G0DK5dsYHtGBGf0BvcEMo8mCCb0RHzv7kV9UAZ99J8QNkH2rFAvJ/HMKkacvuQdAedUbXLv5EPfLavBF+533G4xmbNylFj/A/ph03r92RySa2rr5sfSrhe4FQMnDERF/kR8reVzL+1f6KBB3Ngd3H71A9esmducy8oqxfme0uACCwpL4scqXDaxvXWAUWtp75jwvqsQr4gIgWeZUWFLF+m4UVfC+rt5hPK9tRHvXAKZ//xEXgHdILHoGv/FjUUmZrL9V08s+f9WOYpXvQf79LSFx8Np93PW3UEHxEzar5HvAiZQMqXvyfmNrF+sjGQ+LPS+uQzyX2jR9dpm9kHOPH5uZsaLsWT3ke+LEAWCyTGF8woD+IS2evnqHk2m58PA9ZPc+KZua+mY7SKPJglPpea4HmH2I57MVWxVIzijA6Nik3W5ELvDFFhUAZ+RKLa2s4+fXNbSJH2DN9gi7Z3K4DUYzO/9Tz5D4ATq6B1FUWo2jZ7LYW4jMt1qt7PyK6rfiB+j7PDLnbTX1axrBR5KdD5CZ/4APYi+d+k+A3DvlmNSb7A5vq6YXB9TnXHMLCbVNwccQEJqA1dvszwTlLgCLNVoCkLspgFIMja2AKK61aBTcWiSNVlcBeCddX1JrMZVMJl1i0mh1dvCeQWooOseFN3dJS5u0trkONWm0kl6lw8vGX8Vmng9ehw51N5bJhIj8XOAg3O4HBydCT7aQ1CF3sB1pSgZmpQ7NZE3BmZckSZIkmbP0F4IMiZsiz3m/AAAAAElFTkSuQmCC" alt="adobe-photoshop" style="justify-self: center; align-items: center;"></i>
+                            <p class="text-sm font-medium">Photoshop</p>
+                        </div>
+                        <div class="card-hover bg-white p-6 rounded-xl shadow-sm text-center">
+                            <i>
+                            <img src="data:image/png;base64,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" alt="wordpress" style="justify-self: center; align-items: center;">
+                            </i>
+                            <p class="text-sm font-medium">WordPress</p>
+                        </div>
+                        <div class="card-hover bg-white p-6 rounded-xl shadow-sm text-center">
+                            <i><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAACGUlEQVR4nO2ZT0sbQRiHFwqeelOvPZfizprECBEqGkKadqfuUNh7D82H8KAmKLoI6kl6EKSttmDazFhBKgjdQD9AUbyIt9LFg+DNS3J4ZQlKyJ9xHd1kB+YHv9vCPg/DLLzvapqKioqKSjdznh1ZqVV0eOxW3SGv5uoOnLzoCw3eSyULXir56PC1xrq6Eyp82ALVin7eiYFQ0o8p+YmZtSUMH/oJVHRox4B/vHtuUnKGGQG/wvC9EDB3pzKYkssb+MAC7eC7LYCZ9QEzq9oIH0igE3y3BOyS/QRT4jSDBxLgwXdDwC7ZT+uXtT08V+Au+LAF/h0gMMvkmAffUeBoMrNyF3yYAn/3EKTnY1xwrsAzx4MgFQ0P/lcJwWghDmgmLpdA1dVh45MBw7N1eKkErn7rML0+fAsulcDFIYL3q7EWeCkETvd1yC22giMZBP6UDRgrdoZHURbY+WpAfI4Pj6IsMLGRATSbkFcAMwKZzzkwCiPyCmBG4NU3E+ILo/IK+H39fQqSyyl5BfyaZQtSay/lFcB+KYHxj2kwZhKSCrB605tZMOYSDxMYzFcgSIO8QKTZ7TcQKyblFcCMQG7nrfhAEwUBzIj4SBkVAU10qI+SgNBaJYoC91psRVUg8GpxMO96PReg5D9vuWsya9ek5EvbBwbyrtNrAZNZS5pw7JO+ugT/JEIBp8Tzvzp2yQ7vB4eKioqKitaUa89b1JSYMsZ6AAAAAElFTkSuQmCC" alt="google-meet--v1" style="justify-self: center; align-items: center;"></i>
+                            <p class="text-sm font-medium">Google Meet</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="fade-in">
+                <h2 class="text-4xl font-bold text-center mb-4">My <span class="gradient-text">Projects</span></h2>
+                <p class="text-gray-500 text-center mb-12 max-w-2xl mx-auto">Some of my recent work</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="fade-in card-hover bg-white rounded-2xl overflow-hidden shadow-lg">
+                    <div class="project-media-wrapper">
+                        <img src="Logo.jpeg" alt="Project 1">
+                        <div class="project-overlay">
+                            <span class="project-badge">Logo</span>
+                            <span class="text-sm opacity-90">Canva · PixelLab</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2"> Fashion Avenue Logo</h3>
+                        <p class="text-gray-600 mb-4"> A modern and sleek logo reated for the brand "Fashion Avenue." The design features a clever monogram that integrates the initials 'F' and 'A' into a dynamic, circular shape..</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-purple-100 text-purple-600 text-sm rounded-full">Canva</span>
+                            <span class="px-3 py-1 bg-purple-100 text-purple-600 text-sm rounded-full">PixelLab</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <a href="Logo.jpeg" class="text-purple-600 hover:text-purple-800 font-medium">
+                                <i class="fas fa-external-link-alt mr-1"></i> view Logo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="fade-in card-hover bg-white rounded-2xl overflow-hidden shadow-lg">
+                    <div class="project-media-wrapper">
+                        <img src="flyer.jpeg" alt="Project 2">
+                        <div class="project-overlay">
+                            <span class="project-badge">flyer</span>
+                            <span class="text-sm opacity-90">Photoshop . PixelLab . Canva</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2"> Nikki's Kitchen Food Advertisement</h3>
+                        <p class="text-gray-600 mb-4"> A vibrant and appetizing promotional graphic designed for Nikki's Kitchen to advertise their Jollof Rice & Chicken meal on social media.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-purple-100 text-purple-600 text-sm rounded-full">Photoshop</span>
+                            <span class="px-3 py-1 bg-purple-100 text-purple-600 text-sm rounded-full">PixelLab</span>
+                            <span class="px-3 py-1 bg-purple-100 text-purple-600 text-sm rounded-full">Canva</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <a href="flyer.jpeg" class="text-purple-600 hover:text-purple-800 font-medium">
+                                <i class="fas fa-external-link-alt mr-1"></i>View Flyer
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div class="fade-in card-hover bg-white rounded-2xl overflow-hidden shadow-lg">
+                    <div class="project-media-wrapper">
+                        <img src="bus ard.jpeg" alt="Project 3">
+                        <div class="project-overlay">
+                            <span class="project-badge">Analytics</span>
+                            <span class="text-sm opacity-90">Canva</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Precious Koncept Business Card</h3>
+                        <p class="text-gray-600 mb-4">A professional business card designed for the Managing Director of Precious Koncepts.</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-purple-100 text-purple-600 text-sm rounded-full">Canva</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <a href="bus ard.jpeg" class="text-purple-600 hover:text-purple-800 font-medium">
+                                <i class="fas fa-external-link-alt mr-1"></i> View Business Card
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-12 fade-in">
+                <a href="#" id="viewAllBtn" class="inline-flex items-center gap-2 px-8 py-4 border-2 border-purple-600 text-purple-600 font-semibold rounded-full hover:bg-purple-500 hover:text-white transition-all duration-300">
+                    View All Projects <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <!-- Projects Modal -->
+            <div id="projectsModal" class="fixed inset-0 z-50 hidden items-center justify-center p-6">
+                <div id="projectsModalBackdrop" class="absolute inset-0 bg-black/60"></div>
+                <div class="relative max-w-5xl w-full bg-white rounded-2xl shadow-xl overflow-hidden">
+                    <div class="flex items-center justify-between p-6 border-b">
+                        <h3 class="text-lg font-semibold">All Projects</h3>
+                        <button id="closeProjectsModal" aria-label="Close" class="text-gray-500 hover:text-gray-800 text-2xl">&times;</button>
+                    </div>
+                    <div class="p-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-h-[70vh] overflow-auto">
+                        <!-- Sample project items -->
+                        <div class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover">
+                            <div class="project-media-wrapper">
+                                <img src="SEO marketing traffic.jpeg" alt="Project 4">
+                                <div class="project-overlay">
+                                    <span class="project-badge">SEO MARKETING TRAFFIC</span>
+                                    <span class="text-sm opacity-90">MS Excel</span>
+                                </div>
+
+
+                            </div>
+                            <div class="p-4">
+                                <h4 class="font-semibold">SEO Content Strategy & Traffic Projection</h4>
+                                <p class="text-sm text-gray-600">Data spreadsheet calculating projected organic reach through keyword volume, CTR percentages, and 90-day content scaling formulas, with color-coded cells highlighting key output metrics.</p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="px-3 py-1 bg-purple-100 text-purple-600 text-sm rounded-full">MS Excel</span>
+                                </div>
+                                <div class="flex gap-4">
+                                    <a href="SEO marketing traffic.jpeg" class="text-purple-600 hover:text-purple-800 font-medium">
+                                        <i class="fas fa-external-link-alt mr-1"></i> View Content Strategy
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover">
+                            <div class="project-media-wrapper">
+                                <img src="Sales Funnel.jpeg" alt="Project 5">
+                                <div class="project-overlay">
+                                    <span class="project-badge">Marketing Sales Funnel</span>
+                                    <span class="text-sm opacity-90">Edraw-Max</span>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h4 class="font-semibold"> Digital Marketing Sales Funnel Strategy</h4>
+                                <p class="text-sm text-gray-600">Strategic customer journey visualization mapping traffic flow from social channels (Facebook, Instagram, TikTok) and email through analytics touchpoints to sales page conversion, created in diagramming software.</p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="px-3 py-1 bg-purple-100 text-purple-600 text-sm rounded-full">MS Excel</span>
+                                </div>
+                                <div class="flex gap-4">
+                                    <a href="Sales Funnel.jpeg" class="text-purple-600 hover:text-purple-800 font-medium">
+                                        <i class="fas fa-external-link-alt mr-1"></i> View Content Strategy
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover">
+                            <div class="project-media-wrapper">
+                                <img src="Banner.jpg" alt="Project 6">
+                                <div class="project-overlay">
+                                    <span class="project-badge">Banner</span>
+                                    <span class="text-sm opacity-90">Photoshop</span>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h4 class="font-semibold">Sport Banner</h4>
+                                <p class="text-sm text-gray-600">Custom storefront with payments integration.</p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="px-3 py-1 bg-purple-100 text-purple-600 text-sm rounded-full">Photoshop</span>
+                                </div>
+                                <div class="flex gap-4">
+                                    <a href="banner1.jpg" class="text-purple-600 hover:text-purple-800 font-medium">
+                                        <i class="fas fa-external-link-alt mr-1"></i> View Banner
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover">
+                            <div class="project-media-wrapper">
+                                <img src="Website development.jpeg" alt="Project 7">
+                                <div class="project-overlay">
+                                    <span class="project-badge">Website Development</span>
+                                    <span class="text-sm opacity-90">Wordpress . Elementor</span>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h4 class="font-semibold">Website design: News Kingdom Blog</h4>
+                                <p class="text-sm text-gray-600"> Live website header for Nigerian news platform (newskingdom.ng) featuring distinctive pink gradient cloud-styling in the navigation bar, custom globe iconography, and hero section with high-contrast welcome text overlaid
+                                    on tablet-user photography.</p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="px-3 py-1 bg-purple-100 text-purple-600 text-sm rounded-full">Wordpress . Elementor</span>
+                                </div>
+                                <div class="flex gap-4">
+                                    <a href="#" class="text-purple-600 hover:text-purple-800 font-medium">
+                                        <i class="fas fa-external-link-alt mr-1"></i> View Site
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover">
+                            <div class="project-media-wrapper">
+                                <img src="QUOTE.png" alt="Project 8">
+                                <div class="project-overlay">
+                                    <span class="project-badge">Motivational Quote Graphic</span>
+                                    <span class="text-sm opacity-90">Adobe-photoshop</span>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h4 class="font-semibold">Motivational Quote Graphic</h4>
+                                <p class="text-sm text-gray-600"> A clean and modern graphic designed for social media engagement.The stylized quotation marks and strong frame effectively draw the viewer's attention, making it shareable and visually appealing.</p>
+
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="px-3 py-1 bg-purple-100 text-purple-600 text-sm rounded-full">Photoshop</span>
+                                </div>
+                                <div class="flex gap-4">
+                                    <a href="QUOTE.png" class="text-purple-600 hover:text-purple-800 font-medium">
+                                        <i class="fas fa-external-link-alt mr-1"></i> View Content Strategy
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover">
+                            <div class="project-media-wrapper">
+                                <img src="video.png" alt="Project 6">
+                                <div class="project-overlay">
+                                    <span class="project-badge">My Demo Video</span>
+                                    <span class="text-sm opacity-90">powerpoint</span>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h4 class="font-semibold">My Demo Video</h4>
+                                <p class="text-sm text-gray-600">A short video done with powerpoint.</p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="px-3 py-1 bg-purple-100 text-purple-600 text-sm rounded-full">Photoshop</span>
+                                </div>
+                                <div class="flex gap-4">
+                                    <a href="My Demo video .mp4" class="text-purple-600 hover:text-purple-800 font-medium">
+                                        <i class="fas fa-external-link-alt mr-1"></i> View full video
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="fade-in">
+                <h2 class="text-4xl font-bold text-center mb-4">Get In <span class="gradient-text">Touch</span></h2>
+                <p class="text-gray-500 text-center mb-12 max-w-2xl mx-auto">Have a project in mind? Let's work together!</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="fade-in">
+                    <h3 class="text-2xl font-bold mb-6">Let's talk about your project</h3>
+                    <p class="text-gray-600 mb-8">
+                        I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-envelope text-purple-600"></i>
+                            </div>
+                            <div>
+                                <p class="text-gray-500 text-sm">Email</p>
+                                <p class="font-medium">abimbolaoyeyemi@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-phone text-purple-600"></i>
+                            </div>
+                            <div>
+                                <p class="text-gray-500 text-sm">Phone</p>
+                                <p class="font-medium">+234 806 010 1147</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-map-marker-alt text-purple-600"></i>
+                            </div>
+                            <div>
+                                <p class="text-gray-500 text-sm">Location</p>
+                                <p class="font-medium">13, ifesowapo close, loburo mowe ogun state, Nigeria</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-8">
+                        <p class="text-gray-500 mb-4">Follow me on social media</p>
+                        <div class="flex gap-4">
+                            <a href="https://github.com/Ololadetobby" class="w-10 h-10 bg-gray-300 text-black rounded-full flex items-center justify-center hover:bg-purple-600 hover:text-white transition-colors">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/abimbola-oyeyemi/" class="w-10 h-10 text-blue-600 bg-gray-300 rounded-full flex items-center justify-center hover:bg-purple-600 hover:text-white transition-colors">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-gray-300 text-black rounded-full flex items-center justify-center hover:bg-purple-600 hover:text-white transition-colors">
+                                <i class="fab fa-tiktok"></i>
+                            </a>
+                            <a href="https://web.facebook.com/abimbola.akintunde.96" class="w-10 h-10 bg-gray-300 text-blue-600 rounded-full flex items-center justify-center hover:bg-purple-600 hover:text-white transition-colors">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-gray-300 rounded-full text-red-500 flex items-center justify-center hover:bg-purple-600 hover:text-white transition-colors">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="fade-in">
+                    <form id="contactForm" class="bg-white p-8 rounded-2xl shadow-lg">
+                        <div class="mb-6">
+                            <label class="block text-gray-700 font-medium mb-2">Your Name</label>
+                            <input id="nameInput" type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-500 transition-colors" placeholder="John Doe" required>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-gray-700 font-medium mb-2">Your Email</label>
+                            <input id="emailInput" type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-500 transition-colors" placeholder="john@example.com" required>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-gray-700 font-medium mb-2">Subject</label>
+                            <input id="subjectInput" type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-500 transition-colors" placeholder="Project Inquiry" required>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-gray-700 font-medium mb-2">Message</label>
+                            <textarea id="messageInput" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-purple-500 transition-colors resize-none" placeholder="Tell me about your project..." required></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-semibold rounded-lg hover:opacity-90 transition-opacity">
+                            Send Message <i class="fas fa-paper-plane ml-2"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <a href="#" class="text-2xl font-bold gradient-text">Portfolio</a>
+                    <p class="text-gray-400 mt-2">Building digital experiences that matter.</p>
+                </div>
+                <div class="flex gap-6">
+                    <a href="#home" class="text-gray-400 hover:text-white transition-colors">Home</a>
+                    <a href="#about" class="text-gray-400 hover:text-white transition-colors">About</a>
+                    <a href="#projects" class="text-gray-400 hover:text-white transition-colors">Projects</a>
+                    <a href="#contact" class="text-gray-400 hover:text-white transition-colors">Contact</a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-400">&copy; 2026 Abimbola Oyeyemi. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- Floating WhatsApp button -->
+    <a id="whatsappFloat" class="whatsapp-float" href="#" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp" style="font-size:1.35rem"></i>
+    </a>
+
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = menuBtn.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+        // Close mobile menu when clicking a link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuBtn.querySelector('i').classList.add('fa-bars');
+                menuBtn.querySelector('i').classList.remove('fa-times');
+            });
+        });
+        // Navbar background on scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-md');
+            } else {
+                navbar.classList.remove('shadow-md');
+            }
+        });
+        // Scroll animations
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        fadeElements.forEach(el => observer.observe(el));
+        // Skill bars animation
+        const skillBars = document.querySelectorAll('.skill-bar');
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const width = entry.target.getAttribute('data-width');
+                    entry.target.style.width = width;
+                }
+            });
+        }, {
+            threshold: 0.5
+        });
+        skillBars.forEach(bar => {
+            bar.style.width = '0%';
+            skillObserver.observe(bar);
+        });
+        // Form element reference (submit handler added later)
+        const contactForm = document.getElementById('contactForm');
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Projects modal: open/close handlers
+        const viewAllBtn = document.getElementById('viewAllBtn');
+        const projectsModal = document.getElementById('projectsModal');
+        const projectsModalBackdrop = document.getElementById('projectsModalBackdrop');
+        const closeProjectsModal = document.getElementById('closeProjectsModal');
+
+        function openProjectsModal() {
+            projectsModal.classList.remove('hidden');
+            projectsModal.classList.add('flex');
+            document.documentElement.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            projectsModal.classList.remove('flex');
+            projectsModal.classList.add('hidden');
+            document.documentElement.style.overflow = '';
+        }
+
+        if (viewAllBtn && projectsModal) {
+            viewAllBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                openProjectsModal();
+            });
+        }
+        if (projectsModalBackdrop) projectsModalBackdrop.addEventListener('click', closeModal);
+        if (closeProjectsModal) closeProjectsModal.addEventListener('click', closeModal);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && projectsModal && !projectsModal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+
+        // Download CV fallback: fetch+blob for browsers that ignore `download`
+        const downloadCv = document.getElementById('downloadCv');
+        if (downloadCv) {
+            downloadCv.addEventListener('click', async function(e) {
+                // If browser honors `download` attribute, allow default behaviour
+                const test = 'download' in document.createElement('a');
+                if (test) return;
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                try {
+                    const res = await fetch(href);
+                    if (!res.ok) throw new Error('Network error');
+                    const blob = await res.blob();
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = this.getAttribute('download') || 'CV.pdf';
+                    document.body.appendChild(a);
+                    a.click();
+                    a.remove();
+                    URL.revokeObjectURL(url);
+                } catch (err) {
+                    // Fallback: open in new tab
+                    window.open(href, '_blank', 'noopener');
+                }
+            });
+        }
+    </script>
+
+    <!-- WhatsApp prefill & form autofill script -->
+    <script>
+        (function() {
+            const WA_NUMBER = '2348060101147';
+            const form = document.getElementById('contactForm');
+            const nameEl = document.getElementById('nameInput');
+            const emailEl = document.getElementById('emailInput');
+            const subjectEl = document.getElementById('subjectInput');
+            const messageEl = document.getElementById('messageInput');
+            const waBtn = document.getElementById('whatsappFloat');
+
+            function getParam(key) {
+                return new URLSearchParams(window.location.search).get(key) || '';
+            }
+
+            // Prefill from URL params or localStorage
+            function prefill() {
+                const fromUrl = {
+                    name: getParam('name'),
+                    email: getParam('email'),
+                    subject: getParam('subject'),
+                    message: getParam('message')
+                };
+                const fromStorage = {
+                    name: localStorage.getItem('contact_name') || '',
+                    email: localStorage.getItem('contact_email') || '',
+                    subject: localStorage.getItem('contact_subject') || '',
+                    message: localStorage.getItem('contact_message') || ''
+                };
+
+                if (nameEl) nameEl.value = fromUrl.name || fromStorage.name || '';
+                if (emailEl) emailEl.value = fromUrl.email || fromStorage.email || '';
+                if (subjectEl) subjectEl.value = fromUrl.subject || fromStorage.subject || '';
+                if (messageEl) messageEl.value = fromUrl.message || fromStorage.message || '';
+                updateWhatsAppLink();
+            }
+
+            function saveToStorage() {
+                if (nameEl) localStorage.setItem('contact_name', nameEl.value || '');
+                if (emailEl) localStorage.setItem('contact_email', emailEl.value || '');
+                if (subjectEl) localStorage.setItem('contact_subject', subjectEl.value || '');
+                if (messageEl) localStorage.setItem('contact_message', messageEl.value || '');
+            }
+
+            function buildMessage() {
+                const parts = [];
+                if (nameEl && nameEl.value) parts.push('Name: ' + nameEl.value);
+                if (emailEl && emailEl.value) parts.push('Email: ' + emailEl.value);
+                if (subjectEl && subjectEl.value) parts.push('Subject: ' + subjectEl.value);
+                if (messageEl && messageEl.value) parts.push('Message: ' + messageEl.value);
+                return encodeURIComponent(parts.join('\n'));
+            }
+
+            function updateWhatsAppLink() {
+                if (!waBtn) return;
+                const msg = buildMessage();
+                const href = msg ? `https://wa.me/${WA_NUMBER}?text=${msg}` : `https://wa.me/${WA_NUMBER}`;
+                waBtn.setAttribute('href', href);
+            }
+
+            // Save inputs on change and keep WA button updated
+            [nameEl, emailEl, subjectEl, messageEl].forEach(el => {
+                if (!el) return;
+                el.addEventListener('input', () => {
+                    saveToStorage();
+                    updateWhatsAppLink();
+                });
+            });
+
+            // On form submit: save & open WhatsApp with message
+            if (form) {
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    saveToStorage();
+                    updateWhatsAppLink();
+                    const href = waBtn.getAttribute('href');
+                    window.open(href, '_blank', 'noopener');
+                });
+            }
+
+            // Open WhatsApp immediately when clicking the floating button
+            if (waBtn) {
+                waBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    saveToStorage();
+                    updateWhatsAppLink();
+                    const href = waBtn.getAttribute('href') || `https://wa.me/${WA_NUMBER}`;
+                    window.open(href, '_blank', 'noopener');
+                });
+            }
+
+            // Initialize
+            prefill();
+            // make sure wa button points to right link on load
+            updateWhatsAppLink();
+        })();
+    </script>
+
+    <!-- Theme toggle script: read/write `localStorage` and apply `body.dark` -->
+    <script>
+        (function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const body = document.body;
+
+            function setIcon(theme) {
+                if (!themeToggle) return;
+                const i = themeToggle.querySelector('i');
+                if (!i) return;
+                i.classList.remove('fa-moon', 'fa-sun');
+                if (theme === 'dark') {
+                    i.classList.add('fa-sun');
+                    themeToggle.title = 'Switch to light mode';
+                } else {
+                    i.classList.add('fa-moon');
+                    themeToggle.title = 'Switch to dark mode';
+                }
+            }
+
+            function applyTheme(theme) {
+                if (theme === 'dark') body.classList.add('dark');
+                else body.classList.remove('dark');
+                setIcon(theme);
+            }
+
+            // Load saved preference or system preference
+            const saved = localStorage.getItem('theme');
+            if (saved) applyTheme(saved);
+            else {
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                applyTheme(prefersDark ? 'dark' : 'light');
+            }
+
+            if (themeToggle) {
+                themeToggle.addEventListener('click', () => {
+                    const isDark = body.classList.toggle('dark');
+                    const theme = isDark ? 'dark' : 'light';
+                    localStorage.setItem('theme', theme);
+                    setIcon(theme);
+                });
+            }
+        })();
+    </script>
+</body>
+
+</html>
